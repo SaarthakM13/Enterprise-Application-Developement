@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Timetable - IT-2 Semester IV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #f0f4f8;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px 8px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        th {
+            background-color: #2c3e50;
+            color: white;
+            font-weight: bold;
+        }
+        .day-header {
+            background-color: #34495e;
+            color: white;
+            font-weight: bold;
+        }
+        .time-header {
+            background-color: #3498db;
+            color: white;
+            font-size: 0.85em;
+        }
+        .lunch {
+            background-color: #f39c12;
+            color: white;
+            font-weight: bold;
+        }
+        .lab {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        .library {
+            background-color: #fff3e0;
+            color: #e65100;
+        }
+        .sports {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        .mentoring {
+            background-color: #fce4ec;
+            color: #c2185b;
+        }
+        tr:hover td:not(.lunch):not(.time-header):not(.day-header) {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Class Timetable</h1>
+    <p class="subtitle">Class: BE - IV Semester IT-2 | Batch: B3 | Room: L-301 | W.E.F: 19/01/2026</p>
+    
+    <table>
+        <tr>
+            <th>Day/Time</th>
+            <th class="time-header">I<br>9:10-10:10</th>
+            <th class="time-header">II<br>10:10-11:10</th>
+            <th class="time-header">III<br>11:15-12:15</th>
+            <th class="lunch">LUNCH<br>12:15-1:00</th>
+            <th class="time-header">IV<br>1:00-2:00</th>
+            <th class="time-header">V<br>2:00-3:00</th>
+            <th class="time-header">VI<br>3:05-4:05</th>
+        </tr>
+        <tr>
+            <td class="day-header">MONDAY</td>
+            <td>PE-I</td>
+            <td>EEA</td>
+            <td>PQT</td>
+            <td class="lunch" rowspan="5">L<br>U<br>N<br>C<br>H<br><br>B<br>R<br>E<br>A<br>K</td>
+            <td>DBMS</td>
+            <td class="library">LIBRARY</td>
+            <td class="sports">SPORTS</td>
+        </tr>
+        <tr>
+            <td class="day-header">TUESDAY</td>
+            <td colspan="2" class="lab">MP-I (Mini Project)</td>
+            <td class="library">LIBRARY</td>
+            <td>PQT</td>
+            <td>EEA</td>
+            <td>ES</td>
+        </tr>
+        <tr>
+            <td class="day-header">WEDNESDAY</td>
+            <td>EAD</td>
+            <td>PE-I</td>
+            <td>PQT</td>
+            <td colspan="3" class="lab">EAD LAB (B3)</td>
+        </tr>
+        <tr>
+            <td class="day-header">THURSDAY</td>
+            <td>DBMS</td>
+            <td>EEA</td>
+            <td>EAD</td>
+            <td>PE-I</td>
+            <td>ES</td>
+            <td>PQT (T)</td>
+        </tr>
+        <tr>
+            <td class="day-header">FRIDAY</td>
+            <td colspan="3" class="lab">DBMS LAB (B3)</td>
+            <td>DBMS</td>
+            <td>EAD</td>
+            <td class="mentoring">MENTORING</td>
+        </tr>
+    </table>
+
+    <br><br>
+    
+    <h2 style="text-align: center; color: #2c3e50;">Subject Details</h2>
+    <table>
+        <tr>
+            <th>Sub-Code</th>
+            <th>Course Name</th>
+            <th>Faculty</th>
+        </tr>
+        <tr>
+            <td>22MTC15</td>
+            <td>Probability and Queueing Theory (PQT)</td>
+            <td>Dr. V. Omeshwar Reddy</td>
+        </tr>
+        <tr>
+            <td>22CSC11N</td>
+            <td>Database Management Systems (DBMS)</td>
+            <td>Dr. Kolikipogu Ramakrishna</td>
+        </tr>
+        <tr>
+            <td>22ITC08N</td>
+            <td>Enterprise Application Development (EAD)</td>
+            <td>Mr. N. Shiva Kumar</td>
+        </tr>
+        <tr>
+            <td>23MBC01</td>
+            <td>Engineering Economics & Accountancy (EEA)</td>
+            <td>Prof. T Venkat</td>
+        </tr>
+        <tr>
+            <td>22CEM01</td>
+            <td>Environmental Science (ES)</td>
+            <td>Dr. Kiran Y. V.</td>
+        </tr>
+        <tr>
+            <td>22ITE01</td>
+            <td>Data Mining (PE-I)</td>
+            <td>Dr. Suresh Pabboju</td>
+        </tr>
+        <tr>
+            <td>22CSC13N</td>
+            <td>Database Management Systems Lab</td>
+            <td>Dr. Kolikipogu Ramakrishna</td>
+        </tr>
+        <tr>
+            <td>22ITC09N</td>
+            <td>Enterprise Application Development Lab</td>
+            <td>Mr. N. Shiva Kumar</td>
+        </tr>
+        <tr>
+            <td>22ITC07</td>
+            <td>Mini Project - I (MP-I)</td>
+            <td>Dr. R M Krishna Sureddi (B3)</td>
+        </tr>
+    </table>
+</body>
+</html>
