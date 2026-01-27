@@ -16,7 +16,7 @@ This repository currently contains HTML exercises for Week 1 and Week 2 of the S
 - `Week 1/section5-images-links.html` – images and hyperlinks.
 - `Week 1/section6-tables.html` – tables for academic details.
 - `Week 1/section7-forms.html` – simple registration form.
-<br>
+  
 - `Week 2/exercise1_student_registration.html` - Student Registration Form
 - `Week 2/exercise2_timetable.html` - Simple Timetable
 - `Week 2/exercise3_feedback_form.html` - Feedback Form
@@ -26,6 +26,7 @@ This repository currently contains HTML exercises for Week 1 and Week 2 of the S
 
 ## How to View
 Open each HTML file in a browser (double-click or use Live Server) to see the output for its section.
+
 
 
 
