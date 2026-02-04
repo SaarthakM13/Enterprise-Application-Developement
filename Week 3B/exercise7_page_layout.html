@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 7 - Simple Web Page Layout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            /* Using Flexbox for overall layout */
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 22px 35px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        header h1 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* ========== MAIN CONTAINER (Flexbox) ========== */
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+
+        /* ========== SIDEBAR ========== */
+        .sidebar {
+            width: 240px;
+            background: linear-gradient(180deg, #2d3436 0%, #1a1a2e 100%);
+            color: white;
+            padding: 30px 20px;
+        }
+
+        .sidebar h2 {
+            font-size: 1rem;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #667eea;
+            color: #dfe6e9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            padding: 14px 15px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            color: #b2bec3;
+            transition: all 0.3s ease;
+            font-size: 15px;
+        }
+
+        .sidebar li:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .main-content {
+            flex: 1;
+            background-color: #fff;
+            padding: 40px;
+        }
+
+        .content-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+            padding: 35px;
+            border-radius: 16px;
+            border-left: 5px solid;
+            border-image: linear-gradient(135deg, #667eea, #764ba2) 1;
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.1);
+        }
+
+        .content-card h2 {
+            color: #1a1a2e;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-card p {
+            line-height: 1.8;
+            color: #636e72;
+            font-size: 15px;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <h1>Web Page Layout</h1>
+    </header>
+    
+    <!-- MAIN CONTAINER with Flexbox -->
+    <div class="main-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h2>Navigation</h2>
+            <ul>
+                <li>Dashboard</li>
+                <li>Profile</li>
+                <li>Settings</li>
+                <li>Messages</li>
+                <li>Logout</li>
+            </ul>
+        </aside>
+        
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="content-card">
+                <h2>Main Content Area</h2>
+                <p>This layout demonstrates a complete website structure using CSS Flexbox. 
+                   It includes Header, Sidebar, Main Content, and Footer sections - all essential 
+                   components of a modern web application.</p>
+            </div>
+        </main>
+    </div>
+    
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Saarthak Manocha | EAD Week 3</p>
+    </footer>
+</body>
+</html>

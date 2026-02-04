@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 9 - Responsive Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .info-banner {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-align: center;
+            padding: 18px 25px;
+            border-radius: 14px;
+            margin-bottom: 40px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.3);
+        }
+
+        /* Flexbox Container - ROW on Desktop */
+        .responsive-container {
+            display: flex;
+            flex-direction: row;
+            gap: 25px;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .box {
+            flex: 1;
+            background: white;
+            padding: 35px 25px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+        }
+
+        .box:hover {
+            transform: translateY(-8px);
+        }
+
+        .box h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .box p {
+            color: #636e72;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* Box 1 - Orange/Red */
+        .box-1::before { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .box-1 h2 { color: #f5576c; }
+        .box-1:hover { box-shadow: 0 15px 45px rgba(245, 87, 108, 0.2); }
+
+        /* Box 2 - Green/Teal */
+        .box-2::before { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .box-2 h2 { color: #00b894; }
+        .box-2:hover { box-shadow: 0 15px 45px rgba(0, 184, 148, 0.2); }
+
+        /* Box 3 - Blue/Cyan */
+        .box-3::before { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .box-3 h2 { color: #0984e3; }
+        .box-3:hover { box-shadow: 0 15px 45px rgba(9, 132, 227, 0.2); }
+
+        /* ========== MEDIA QUERY ========== */
+        /* Responsive - COLUMN on Mobile (max-width: 768px) */
+        @media (max-width: 768px) {
+            .responsive-container {
+                flex-direction: column;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .info-banner {
+                font-size: 14px;
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Responsive Design</h1>
+    
+    <div class="info-banner">
+        📱 Resize your browser window to see the layout change!
+    </div>
+    
+    <div class="responsive-container">
+        <div class="box box-1">
+            <h2>Desktop View</h2>
+            <p>Boxes display side-by-side in a row using flex-direction: row.</p>
+        </div>
+        <div class="box box-2">
+            <h2>Mobile View</h2>
+            <p>On screens less than 768px, boxes stack vertically using flex-direction: column.</p>
+        </div>
+        <div class="box box-3">
+            <h2>Media Query</h2>
+            <p>@media (max-width: 768px) triggers the responsive layout change.</p>
+        </div>
+    </div>
+</body>
+</html>

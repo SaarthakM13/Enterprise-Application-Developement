@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 5 - CSS Positioning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a1a2e;
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        .container {
+            /* position: relative - makes this the reference for absolute positioned children */
+            position: relative;
+            width: 100%;
+            max-width: 850px;
+            height: 420px;
+            background: white;
+            border: 3px dashed #dfe6e9;
+            border-radius: 16px;
+            margin: 0 auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .box {
+            width: 170px;
+            height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            text-align: center;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .box span {
+            font-size: 11px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        /* position: static - default, normal document flow */
+        .box-static {
+            position: static;
+            background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
+            box-shadow: 0 10px 30px rgba(214, 48, 49, 0.4);
+        }
+
+        /* position: relative - offset from normal position */
+        .box-relative {
+            position: relative;
+            /* top, left - offset values */
+            top: 30px;
+            left: 80px;
+            background: linear-gradient(135deg, #0984e3 0%, #74b9ff 100%);
+            box-shadow: 0 10px 30px rgba(9, 132, 227, 0.4);
+        }
+
+        /* position: absolute - positioned relative to nearest positioned ancestor */
+        .box-absolute {
+            position: absolute;
+            /* top, right - position values */
+            top: 120px;
+            right: 60px;
+            background: linear-gradient(135deg, #00b894 0%, #55efc4 100%);
+            box-shadow: 0 10px 30px rgba(0, 184, 148, 0.4);
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #2d3436;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+        }
+
+        .legend-static { background: linear-gradient(135deg, #e17055, #d63031); }
+        .legend-relative { background: linear-gradient(135deg, #0984e3, #74b9ff); }
+        .legend-absolute { background: linear-gradient(135deg, #00b894, #55efc4); }
+    </style>
+</head>
+<body>
+    <h1>CSS Positioning</h1>
+    
+    <div class="container">
+        <div class="box box-static">
+            STATIC
+            <span>(Default Flow)</span>
+        </div>
+        <div class="box box-relative">
+            RELATIVE
+            <span>(top: 30px, left: 80px)</span>
+        </div>
+        <div class="box box-absolute">
+            ABSOLUTE
+            <span>(top: 120px, right: 60px)</span>
+        </div>
+    </div>
+
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-color legend-static"></div>
+            <span>Static - Normal flow</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color legend-relative"></div>
+            <span>Relative - Offset from normal</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color legend-absolute"></div>
+            <span>Absolute - Positioned to container</span>
+        </div>
+    </div>
+</body>
+</html>

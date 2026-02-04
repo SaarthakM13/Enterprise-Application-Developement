@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 6 - Flexbox Layout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            padding: 50px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a1a2e;
+            margin-bottom: 45px;
+            font-size: 2rem;
+        }
+
+        /* Flexbox Container */
+        .flex-container {
+            /* display: flex - enables flexbox */
+            display: flex;
+            /* justify-content: center - centers horizontally */
+            justify-content: center;
+            /* align-items: center - centers vertically */
+            align-items: center;
+            /* gap - spacing between items */
+            gap: 25px;
+            
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .box {
+            width: 130px;
+            height: 130px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 17px;
+            border-radius: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .box:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .box-1 { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+        }
+        .box-1:hover { box-shadow: 0 18px 40px rgba(102, 126, 234, 0.5); }
+        
+        .box-2 { 
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); 
+            box-shadow: 0 12px 30px rgba(245, 87, 108, 0.4);
+        }
+        .box-2:hover { box-shadow: 0 18px 40px rgba(245, 87, 108, 0.5); }
+        
+        .box-3 { 
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); 
+            box-shadow: 0 12px 30px rgba(79, 172, 254, 0.4);
+        }
+        .box-3:hover { box-shadow: 0 18px 40px rgba(79, 172, 254, 0.5); }
+        
+        .box-4 { 
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); 
+            box-shadow: 0 12px 30px rgba(67, 233, 123, 0.4);
+        }
+        .box-4:hover { box-shadow: 0 18px 40px rgba(67, 233, 123, 0.5); }
+
+        /* Info Section */
+        .info {
+            max-width: 750px;
+            margin: 40px auto 0;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .info-tag {
+            padding: 10px 22px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>Flexbox Layout</h1>
+    
+    <div class="flex-container">
+        <div class="box box-1">Box 1</div>
+        <div class="box box-2">Box 2</div>
+        <div class="box box-3">Box 3</div>
+        <div class="box box-4">Box 4</div>
+    </div>
+
+    <div class="info">
+        <span class="info-tag">display: flex</span>
+        <span class="info-tag">justify-content: center</span>
+        <span class="info-tag">align-items: center</span>
+        <span class="info-tag">gap: 25px</span>
+    </div>
+</body>
+</html>

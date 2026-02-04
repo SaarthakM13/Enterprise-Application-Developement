@@ -1,0 +1,30 @@
+/* ========== EXTERNAL CSS FILE ========== */
+/* This demonstrates External CSS - linked via <link> tag */
+
+/* Element Selector - targets body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* Element Selector - targets all paragraphs */
+p {
+    margin: 15px 0;
+    font-size: 16px;
+    color: #2d3436;
+}
+
+/* Element Selector - targets button */
+button {
+    display: block;
+    margin: 35px auto;
+}
+
+/* Element Selector - targets strong */
+strong {
+    color: #667eea;
+}

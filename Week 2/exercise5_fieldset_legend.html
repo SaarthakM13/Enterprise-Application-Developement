@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Form</title>
+</head>
+
+<body>
+    <h1 align="center">📋 Registration Form</h1>
+    <form action="#" method="post">
+        <!-- Personal Information Fieldset -->
+        <fieldset>
+            <legend>👤 User Information</legend>
+
+            <label for="fullname">Full Name:</label><br>
+            <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required><br><br>
+
+            <label for="dob">Date of Birth:</label><br>
+            <input type="date" id="dob" name="dob" required><br><br>
+
+            <label>Gender:</label><br>
+            <input type="radio" id="male" name="gender" value="male" required>
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label>
+        </fieldset>
+
+        <br>
+
+        <!-- Contact Information Fieldset -->
+        <fieldset>
+            <legend>📞 Contact Information</legend>
+
+            <label for="email">Email Address:</label><br>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required><br><br>
+
+            <label for="phone">Phone Number:</label><br>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required><br><br>
+
+            <label for="address">Address:</label><br>
+            <input type="text" id="address" name="address" placeholder="Enter your address">
+        </fieldset>
+
+        <br>
+
+        <!-- Account Information Fieldset -->
+        <fieldset>
+            <legend>🔐 Account Preferences</legend>
+
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" placeholder="Choose a username" required><br><br>
+
+            <label for="notification">Notification Preference:</label><br>
+            <select id="notification" name="notification">
+                <option value="email">Email Notifications</option>
+                <option value="sms">SMS Notifications</option>
+                <option value="both">Both Email &amp; SMS</option>
+                <option value="none">No Notifications</option>
+            </select>
+        </fieldset>
+
+        <br>
+
+        <button type="submit">Submit Information</button>
+    </form>
+</body>
+
+</html>

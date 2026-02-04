@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 3 - Student Profile Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Font-family */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .profile-card {
+            /* Background-color */
+            background-color: white;
+            /* Border-radius */
+            border-radius: 24px;
+            /* Box-shadow */
+            box-shadow: 0 20px 60px rgba(108, 92, 231, 0.25);
+            padding: 45px;
+            text-align: center;
+            width: 360px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative gradient top */
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 24px 24px 50% 50%;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            /* Background-color with gradient */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            /* Border-radius for circle */
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 42px;
+            color: white;
+            font-weight: bold;
+            /* Box-shadow */
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+            position: relative;
+            z-index: 1;
+            border: 5px solid white;
+        }
+
+        .student-name {
+            font-size: 26px;
+            font-weight: bold;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+            /* Font-family inherited */
+        }
+
+        .roll-number {
+            font-size: 14px;
+            color: #636e72;
+            margin-bottom: 18px;
+        }
+
+        .department {
+            /* Background-color with gradient */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 28px;
+            /* Border-radius */
+            border-radius: 30px;
+            font-size: 14px;
+            display: inline-block;
+            font-weight: 600;
+            /* Box-shadow */
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            margin: 30px 0;
+            /* Border-radius */
+            border-radius: 1px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 14px 0;
+            font-size: 15px;
+            padding: 8px 0;
+        }
+
+        .info-label {
+            color: #b2bec3;
+        }
+
+        .info-value {
+            color: #1a1a2e;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <div class="avatar">SM</div>
+        <h2 class="student-name">Saarthak Manocha</h2>
+        <p class="roll-number">1601-24-737-129</p>
+        <span class="department">Information Technology</span>
+        
+        <div class="divider"></div>
+        
+        <div class="info-row">
+            <span class="info-label">Semester</span>
+            <span class="info-value">4th</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Subject</span>
+            <span class="info-value">EAD</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Section</span>
+            <span class="info-value">IT - 2</span>
+        </div>
+    </div>
+</body>
+</html>
