@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 10 - Navigation Bar with Dropdown</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
+            min-height: 100vh;
+        }
+
+        /* ========== NAVIGATION BAR ========== */
+        .navbar {
+            background: #1a1a2e;
+            padding: 0 40px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .nav-list > li {
+            position: relative;
+        }
+
+        .nav-list > li > a {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            padding: 22px 28px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-list > li > a:hover {
+            color: white;
+        }
+
+        /* Underline accent - warm coral */
+        .nav-list > li > a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: #e17055;
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .nav-list > li:hover > a::after {
+            width: 50%;
+        }
+
+        .has-dropdown > a::before {
+            content: ' ▾';
+            font-size: 11px;
+            margin-left: 5px;
+        }
+
+        /* ========== DROPDOWN MENU ========== */
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            background: white;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 15px 40px rgba(26, 26, 46, 0.18);
+            list-style: none;
+            overflow: hidden;
+            z-index: 100;
+            border-top: 3px solid #e17055;
+        }
+
+        /* Show dropdown on hover */
+        .has-dropdown:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown li a {
+            display: block;
+            padding: 14px 22px;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown li a:hover {
+            background: #fff5f3;
+            color: #e17055;
+            padding-left: 28px;
+        }
+
+        .dropdown li:not(:last-child) a {
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 span {
+            color: #e17055;
+        }
+
+        .hero p {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 15px;
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ========== CONTENT ========== */
+        .content {
+            max-width: 750px;
+            margin: 50px auto;
+            padding: 40px;
+        }
+
+        .content h2 {
+            color: #1a1a2e;
+            margin-bottom: 18px;
+            font-size: 1.4rem;
+        }
+
+        .content p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .content strong {
+            color: #1a1a2e;
+        }
+
+        .concept-list {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .concept-tag {
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 2px solid;
+        }
+
+        .concept-tag:nth-child(1) {
+            color: #e17055;
+            border-color: #e17055;
+            background: #fff5f3;
+        }
+
+        .concept-tag:nth-child(2) {
+            color: #1a1a2e;
+            border-color: #1a1a2e;
+            background: #f0f0f5;
+        }
+
+        .concept-tag:nth-child(3) {
+            color: #0f3460;
+            border-color: #0f3460;
+            background: #eef3f9;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li><a href="#">Home</a></li>
+
+            <li class="has-dropdown">
+                <a href="#">Courses</a>
+                <ul class="dropdown">
+                    <li><a href="#">Web Development</a></li>
+                    <li><a href="#">Data Structures</a></li>
+                    <li><a href="#">Machine Learning</a></li>
+                    <li><a href="#">Database Systems</a></li>
+                </ul>
+            </li>
+
+            <li class="has-dropdown">
+                <a href="#">Resources</a>
+                <ul class="dropdown">
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Tutorials</a></li>
+                    <li><a href="#">Downloads</a></li>
+                </ul>
+            </li>
+
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <h1>CSS-Only <span>Dropdown</span> Navigation</h1>
+        <p>
+            A clean navigation bar with dropdown menus built entirely with CSS — 
+            no JavaScript required. Hover over Courses or Resources to see it in action.
+        </p>
+    </div>
+
+    <div class="content">
+        <h2>How It Works</h2>
+        <p>
+            The dropdown menus use <strong>position: absolute</strong> to overlay content below the navbar.
+            They are hidden by default with <strong>display: none</strong>, and revealed when 
+            the parent list item is hovered using the <strong>:hover</strong> pseudo-class.
+        </p>
+        <div class="concept-list">
+            <span class="concept-tag">position: absolute</span>
+            <span class="concept-tag">:hover pseudo-class</span>
+            <span class="concept-tag">display property</span>
+        </div>
+    </div>
+</body>
+</html>
