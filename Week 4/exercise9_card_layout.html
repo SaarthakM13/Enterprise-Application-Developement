@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 9 - CSS Card Layout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
+            min-height: 100vh;
+            padding: 50px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a1a2e;
+            margin-bottom: 15px;
+            font-size: 2.2rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #636e72;
+            margin-bottom: 50px;
+            font-size: 16px;
+        }
+
+        /* ========== CARD CONTAINER ========== */
+        .card-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ========== CARD STYLING ========== */
+        .card {
+            background: white;
+            /* border-radius */
+            border-radius: 20px;
+            /* box-shadow */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            width: 320px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Card Top Accent */
+        .card-accent {
+            height: 8px;
+        }
+
+        .card:nth-child(1) .card-accent {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .card:nth-child(2) .card-accent {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .card:nth-child(3) .card-accent {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+
+        /* Card Body */
+        .card-body {
+            padding: 35px 30px;
+        }
+
+        /* Card Icon */
+        .card-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            margin-bottom: 22px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card:nth-child(1) .card-icon {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .card:nth-child(2) .card-icon {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .card:nth-child(3) .card-icon {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+
+        /* Card Title */
+        .card h3 {
+            font-size: 1.3rem;
+            color: #1a1a2e;
+            margin-bottom: 12px;
+        }
+
+        /* Card Description */
+        .card p {
+            color: #636e72;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        /* Card Meta */
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 18px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .card-meta span {
+            font-size: 13px;
+            color: #b2bec3;
+        }
+
+        /* Card Button */
+        .card-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .card:nth-child(1) .card-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            box-shadow: 0 6px 18px rgba(102, 126, 234, 0.4);
+        }
+
+        .card:nth-child(1) .card-btn:hover {
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .card:nth-child(2) .card-btn {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            box-shadow: 0 6px 18px rgba(245, 87, 108, 0.4);
+        }
+
+        .card:nth-child(2) .card-btn:hover {
+            box-shadow: 0 10px 25px rgba(245, 87, 108, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .card:nth-child(3) .card-btn {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            color: #1a1a2e;
+            box-shadow: 0 6px 18px rgba(67, 233, 123, 0.4);
+        }
+
+        .card:nth-child(3) .card-btn:hover {
+            box-shadow: 0 10px 25px rgba(67, 233, 123, 0.5);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <h1>Course Catalog</h1>
+    <p class="subtitle">Browse our featured courses and start learning today</p>
+
+    <div class="card-container">
+        <!-- Card 1 -->
+        <div class="card">
+            <div class="card-accent"></div>
+            <div class="card-body">
+                <div class="card-icon">💻</div>
+                <h3>Web Development</h3>
+                <p>Master HTML, CSS, and JavaScript to build modern, responsive websites from scratch. Includes hands-on projects and real-world applications.</p>
+                <div class="card-meta">
+                    <span>12 weeks • 48 lessons</span>
+                    <a href="#" class="card-btn">Enroll</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <div class="card-accent"></div>
+            <div class="card-body">
+                <div class="card-icon">📱</div>
+                <h3>Mobile App Design</h3>
+                <p>Learn to design beautiful mobile app interfaces using modern UI/UX principles. Create wireframes, prototypes, and polished designs.</p>
+                <div class="card-meta">
+                    <span>8 weeks • 32 lessons</span>
+                    <a href="#" class="card-btn">Enroll</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+            <div class="card-accent"></div>
+            <div class="card-body">
+                <div class="card-icon">🗄️</div>
+                <h3>Database Systems</h3>
+                <p>Understand relational databases, SQL queries, normalization, and database design patterns for efficient data management.</p>
+                <div class="card-meta">
+                    <span>10 weeks • 40 lessons</span>
+                    <a href="#" class="card-btn">Enroll</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
