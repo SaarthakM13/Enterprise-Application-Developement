@@ -1,6 +1,6 @@
 # EAD Course – Weekly Exercises
 
-This repository contains Week 1 through 3 codes for the Semester 4 Enterprise Application Development course.
+This repository contains Week 1 through 4 codes for the Semester 4 Enterprise Application Development course.
 
 ## Student Info
 
@@ -11,12 +11,13 @@ This repository contains Week 1 through 3 codes for the Semester 4 Enterprise Ap
 
 ## Folder Structure
 
-| Folder  | Description                                      |
-| ------- | ------------------------------------------------ |
-| Week 1  | Basic HTML - Document structure, elements, tags  |
-| Week 2  | Practical HTML - Forms, tables, lists (no CSS)   |
-| Week 3A | Practical HTML + CSS - Styled versions of Week 2 |
-| Week 3B | Pure CSS - Advanced CSS concepts & styling       |
+| Folder  | Description                                       |
+| ------- | ------------------------------------------------- |
+| Week 1  | Basic HTML - Document structure, elements, tags   |
+| Week 2  | Practical HTML - Forms, tables, lists (no CSS)    |
+| Week 3A | Practical HTML + CSS - Styled versions of Week 2  |
+| Week 3B | Pure CSS - Advanced CSS concepts & styling        |
+| Week 4  | CSS Layouts & Components - Grid, cards, dropdowns |
 
 ---
 
@@ -63,6 +64,15 @@ This repository contains Week 1 through 3 codes for the Semester 4 Enterprise Ap
 - `exercise8_login_form.html` – Styled Login Form
 - `exercise9_responsive.html` – Responsive Design with Media Queries
 - `exercise10_college_website.html` – Mini Project: CBIT College Website
+
+### Week 4 – CSS Layouts & Components
+
+- `exercise7_chessboard.html` – Chess Board using nth-child Selectors
+- `exercise8_calculator.html` – Calculator UI with CSS Grid
+- `exercise9_card_layout.html` – CSS Card Layout with Shadows
+- `exercise10_dropdown_nav.html` – Navigation Bar with Dropdown
+- `exercise11_login_page.html` – Styled Login Page
+- `exercise12_responsive_layout.html` – Responsive Layout with Media Queries
 
 ---
 
