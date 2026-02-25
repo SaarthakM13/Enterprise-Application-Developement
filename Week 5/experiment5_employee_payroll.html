@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 5 - Employee Payroll</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #1a1a2e;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 36px;
+        }
+
+        /* ========== INPUT FORM ========== */
+        .form-card {
+            background: #1a1a2e;
+            border-radius: 14px;
+            padding: 30px;
+            margin-bottom: 28px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            color: #94a3b8;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group label .default-hint {
+            color: #64748b;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .form-group input {
+            padding: 12px 14px;
+            background: #16213e;
+            border: 2px solid #2d3a5c;
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.25s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        }
+
+        .form-group input::placeholder {
+            color: #475569;
+        }
+
+        .calculate-btn {
+            grid-column: span 2;
+            padding: 14px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            margin-top: 4px;
+        }
+
+        .calculate-btn:hover {
+            background: #059669;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35);
+            transform: translateY(-2px);
+        }
+
+        /* ========== PAYSLIP ========== */
+        .payslip {
+            display: none;
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .payslip.show {
+            display: block;
+        }
+
+        .payslip-header {
+            background: #1a1a2e;
+            padding: 22px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .payslip-header h2 {
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .payslip-header .emp-id {
+            color: #10b981;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .payslip-body {
+            padding: 28px;
+        }
+
+        .emp-name {
+            font-size: 1.4rem;
+            color: #1e293b;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        /* Salary rows */
+        .salary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .salary-row .label {
+            color: #64748b;
+        }
+
+        .salary-row .amount {
+            color: #1e293b;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+        }
+
+        .salary-row.earning .amount {
+            color: #10b981;
+        }
+
+        .salary-row.deduction .amount {
+            color: #ef4444;
+        }
+
+        .salary-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 12px 0;
+        }
+
+        .salary-divider.thick {
+            height: 2px;
+            background: #1a1a2e;
+            margin: 16px 0;
+        }
+
+        /* Net salary highlight */
+        .net-salary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: #f0fdf4;
+            border-radius: 10px;
+            border: 1px solid #bbf7d0;
+            margin-top: 4px;
+        }
+
+        .net-salary-row .label {
+            color: #1e293b;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .net-salary-row .amount {
+            color: #10b981;
+            font-weight: 800;
+            font-size: 1.3rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* ========== CONCEPT TAGS ========== */
+        .concept-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        .concept-tag {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 2px solid;
+        }
+
+        .concept-tag:nth-child(1) { color: #10b981; border-color: #10b981; background: #f0fdf4; }
+        .concept-tag:nth-child(2) { color: #f59e0b; border-color: #f59e0b; background: #fffbeb; }
+        .concept-tag:nth-child(3) { color: #e17055; border-color: #e17055; background: #fff5f3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💰 Employee Payroll</h1>
+        <p class="subtitle">Calculate net salary using constructor functions</p>
+
+        <div class="form-card">
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label>Employee Name</label>
+                    <input type="text" id="empName" placeholder="Enter full name">
+                </div>
+
+                <div class="form-group">
+                    <label>Basic Salary (₹)</label>
+                    <input type="number" id="basicSalary" placeholder="e.g. 50000">
+                </div>
+
+                <div class="form-group">
+                    <label>HRA (₹) <span class="default-hint">— default: 2000</span></label>
+                    <input type="number" id="hra" placeholder="2000">
+                </div>
+
+                <div class="form-group">
+                    <label>TA (₹) <span class="default-hint">— default: 1000</span></label>
+                    <input type="number" id="ta" placeholder="1000">
+                </div>
+
+                <div class="form-group">
+                    <label>Tax Rate <span class="default-hint">— 10%</span></label>
+                    <input type="text" value="10%" disabled style="opacity: 0.5;">
+                </div>
+
+                <button class="calculate-btn" onclick="generatePayslip()">
+                    📋 Generate Payslip
+                </button>
+            </div>
+        </div>
+
+        <div class="payslip" id="payslip">
+            <div class="payslip-header">
+                <h2>Pay Slip</h2>
+                <span class="emp-id" id="empId">EMP-001</span>
+            </div>
+            <div class="payslip-body">
+                <p class="emp-name" id="displayName">—</p>
+
+                <div class="salary-row earning">
+                    <span class="label">Basic Salary</span>
+                    <span class="amount" id="displayBasic">₹0</span>
+                </div>
+                <div class="salary-row earning">
+                    <span class="label">House Rent Allowance (HRA)</span>
+                    <span class="amount" id="displayHRA">₹0</span>
+                </div>
+                <div class="salary-row earning">
+                    <span class="label">Travel Allowance (TA)</span>
+                    <span class="amount" id="displayTA">₹0</span>
+                </div>
+
+                <div class="salary-divider"></div>
+
+                <div class="salary-row">
+                    <span class="label"><strong>Gross Salary</strong></span>
+                    <span class="amount" id="displayGross">₹0</span>
+                </div>
+
+                <div class="salary-divider"></div>
+
+                <div class="salary-row deduction">
+                    <span class="label">Tax Deduction (10%)</span>
+                    <span class="amount" id="displayTax">-₹0</span>
+                </div>
+
+                <div class="salary-divider thick"></div>
+
+                <div class="net-salary-row">
+                    <span class="label">Net Salary</span>
+                    <span class="amount" id="displayNet">₹0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="concept-tags">
+            <span class="concept-tag">Constructor Functions</span>
+            <span class="concept-tag">Default Parameters</span>
+            <span class="concept-tag">Object Methods</span>
+        </div>
+    </div>
+
+    <script>
+        // ========== CONSTRUCTOR FUNCTION with Default Parameters ==========
+        function Employee(name, basicSalary, hra, ta) {
+            // Default parameters
+            this.name = name;
+            this.basicSalary = basicSalary;
+            this.hra = (hra !== undefined && hra !== '') ? Number(hra) : 2000;
+            this.ta = (ta !== undefined && ta !== '') ? Number(ta) : 1000;
+
+            // ========== OBJECT METHOD: Calculate Net Salary ==========
+            this.calculateNetSalary = function () {
+                var grossSalary = this.basicSalary + this.hra + this.ta;
+                var tax = grossSalary * 0.10; // 10% tax
+                var netSalary = grossSalary - tax;
+
+                return {
+                    basic: this.basicSalary,
+                    hra: this.hra,
+                    ta: this.ta,
+                    gross: grossSalary,
+                    tax: tax,
+                    net: netSalary
+                };
+            };
+        }
+
+        // Format currency
+        function formatCurrency(amount) {
+            return '₹' + amount.toLocaleString('en-IN');
+        }
+
+        // Employee counter for IDs
+        var empCounter = 0;
+
+        // ========== DOM: Generate Payslip ==========
+        function generatePayslip() {
+            var name = document.getElementById('empName').value.trim();
+            var basic = parseFloat(document.getElementById('basicSalary').value);
+            var hraVal = document.getElementById('hra').value;
+            var taVal = document.getElementById('ta').value;
+
+            // Validation
+            if (name === '') {
+                alert('Please enter employee name!');
+                return;
+            }
+            if (isNaN(basic) || basic <= 0) {
+                alert('Please enter a valid basic salary!');
+                return;
+            }
+
+            // Create Employee using Constructor
+            var emp = new Employee(name, basic, hraVal, taVal);
+
+            // Call the object method
+            var salary = emp.calculateNetSalary();
+
+            // Update employee ID
+            empCounter++;
+            document.getElementById('empId').textContent =
+                'EMP-' + String(empCounter).padStart(3, '0');
+
+            // Display results
+            document.getElementById('displayName').textContent = emp.name;
+            document.getElementById('displayBasic').textContent = formatCurrency(salary.basic);
+            document.getElementById('displayHRA').textContent = formatCurrency(salary.hra);
+            document.getElementById('displayTA').textContent = formatCurrency(salary.ta);
+            document.getElementById('displayGross').textContent = formatCurrency(salary.gross);
+            document.getElementById('displayTax').textContent = '-' + formatCurrency(salary.tax);
+            document.getElementById('displayNet').textContent = formatCurrency(salary.net);
+
+            // Show payslip
+            document.getElementById('payslip').classList.add('show');
+        }
+
+        // Enter key support
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') generatePayslip();
+        });
+    </script>
+</body>
+</html>

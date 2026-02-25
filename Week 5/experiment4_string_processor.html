@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 4 - String Processor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #1a1a2e;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 36px;
+        }
+
+        /* ========== INPUT AREA ========== */
+        .input-area {
+            background: #1a1a2e;
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 28px;
+        }
+
+        .input-area textarea {
+            width: 100%;
+            padding: 16px;
+            background: #16213e;
+            border: 2px solid #2d3a5c;
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 80px;
+            transition: all 0.25s ease;
+        }
+
+        .input-area textarea:focus {
+            outline: none;
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+        }
+
+        .input-area textarea::placeholder {
+            color: #475569;
+        }
+
+        .process-btn {
+            display: block;
+            width: 100%;
+            margin-top: 14px;
+            padding: 14px;
+            background: #f59e0b;
+            color: #1a1a2e;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .process-btn:hover {
+            background: #d97706;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.35);
+            transform: translateY(-2px);
+        }
+
+        /* ========== RESULTS ========== */
+        .result-card {
+            background: white;
+            border-radius: 12px;
+            padding: 22px 24px;
+            margin-bottom: 14px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .result-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .result-label .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .result-label span {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .result-value {
+            color: #1e293b;
+            font-size: 15px;
+            font-weight: 500;
+            word-break: break-word;
+            line-height: 1.6;
+        }
+
+        .result-type {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Individual card colors */
+        .card-reverse .dot { background: #f59e0b; }
+        .card-reverse .result-label span { color: #f59e0b; }
+        .card-reverse { border-left: 3px solid #f59e0b; }
+        .card-reverse .result-type { background: #fffbeb; color: #d97706; }
+
+        .card-vowels .dot { background: #0d9488; }
+        .card-vowels .result-label span { color: #0d9488; }
+        .card-vowels { border-left: 3px solid #0d9488; }
+        .card-vowels .result-type { background: #f0fdfa; color: #0d9488; }
+
+        .card-longest .dot { background: #e17055; }
+        .card-longest .result-label span { color: #e17055; }
+        .card-longest { border-left: 3px solid #e17055; }
+        .card-longest .result-type { background: #fff5f3; color: #e17055; }
+
+        .card-upper .dot { background: #a78bfa; }
+        .card-upper .result-label span { color: #a78bfa; }
+        .card-upper { border-left: 3px solid #a78bfa; }
+        .card-upper .result-type { background: #f5f3ff; color: #8b5cf6; }
+
+        .placeholder-text {
+            color: #cbd5e1;
+            font-style: italic;
+        }
+
+        /* ========== CONCEPT TAGS ========== */
+        .concept-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        .concept-tag {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 2px solid;
+        }
+
+        .concept-tag:nth-child(1) { color: #f59e0b; border-color: #f59e0b; background: #fffbeb; }
+        .concept-tag:nth-child(2) { color: #0d9488; border-color: #0d9488; background: #f0fdfa; }
+        .concept-tag:nth-child(3) { color: #e17055; border-color: #e17055; background: #fff5f3; }
+        .concept-tag:nth-child(4) { color: #a78bfa; border-color: #a78bfa; background: #f5f3ff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 String Processor</h1>
+        <p class="subtitle">Analyze text using different function types</p>
+
+        <div class="input-area">
+            <textarea id="textInput" placeholder="Enter a sentence here..."></textarea>
+            <button class="process-btn" onclick="processString()">⚡ Process</button>
+        </div>
+
+        <div class="result-card card-reverse">
+            <div class="result-label">
+                <div class="dot"></div>
+                <span>Reversed String</span>
+            </div>
+            <p class="result-value" id="reverseResult"><span class="placeholder-text">Waiting for input...</span></p>
+            <span class="result-type">Anonymous Function</span>
+        </div>
+
+        <div class="result-card card-vowels">
+            <div class="result-label">
+                <div class="dot"></div>
+                <span>Vowel Count</span>
+            </div>
+            <p class="result-value" id="vowelResult"><span class="placeholder-text">Waiting for input...</span></p>
+            <span class="result-type">Arrow Function</span>
+        </div>
+
+        <div class="result-card card-longest">
+            <div class="result-label">
+                <div class="dot"></div>
+                <span>Longest Word</span>
+            </div>
+            <p class="result-value" id="longestResult"><span class="placeholder-text">Waiting for input...</span></p>
+            <span class="result-type">Anonymous Function</span>
+        </div>
+
+        <div class="result-card card-upper">
+            <div class="result-label">
+                <div class="dot"></div>
+                <span>Uppercase</span>
+            </div>
+            <p class="result-value" id="upperResult"><span class="placeholder-text">Waiting for input...</span></p>
+            <span class="result-type">Direct Method</span>
+        </div>
+
+        <div class="concept-tags">
+            <span class="concept-tag">Anonymous Functions</span>
+            <span class="concept-tag">Arrow Functions</span>
+            <span class="concept-tag">Array Methods</span>
+            <span class="concept-tag">Split & Reverse</span>
+        </div>
+    </div>
+
+    <script>
+        // ========== ANONYMOUS FUNCTION: Reverse String ==========
+        // Uses split(), reverse(), join() array methods
+        var reverseString = function (str) {
+            return str.split('').reverse().join('');
+        };
+
+        // ========== ARROW FUNCTION: Count Vowels ==========
+        // Uses filter() array method
+        const countVowels = (str) => {
+            var vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'];
+            return str.split('').filter(char => vowels.includes(char)).length;
+        };
+
+        // ========== ANONYMOUS FUNCTION: Find Longest Word ==========
+        // Uses split() and reduce() array methods
+        var findLongestWord = function (str) {
+            var words = str.split(/\s+/).filter(word => word.length > 0);
+            if (words.length === 0) return '';
+
+            return words.reduce(function (longest, current) {
+                return current.length > longest.length ? current : longest;
+            }, '');
+        };
+
+        // ========== PROCESS STRING (DOM Manipulation) ==========
+        function processString() {
+            var input = document.getElementById('textInput').value.trim();
+
+            if (input === '') {
+                alert('Please enter a sentence!');
+                return;
+            }
+
+            // Reverse string (anonymous function)
+            var reversed = reverseString(input);
+            document.getElementById('reverseResult').textContent = reversed;
+
+            // Count vowels (arrow function)
+            var vowelCount = countVowels(input);
+            document.getElementById('vowelResult').textContent =
+                vowelCount + ' vowel' + (vowelCount !== 1 ? 's' : '') + ' found';
+
+            // Longest word (anonymous function)
+            var longest = findLongestWord(input);
+            document.getElementById('longestResult').textContent =
+                '"' + longest + '" (' + longest.length + ' characters)';
+
+            // Uppercase (direct method)
+            document.getElementById('upperResult').textContent =
+                input.toUpperCase();
+        }
+
+        // Enter key support (Ctrl+Enter for textarea)
+        document.getElementById('textInput').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && e.ctrlKey) processString();
+        });
+    </script>
+</body>
+</html>

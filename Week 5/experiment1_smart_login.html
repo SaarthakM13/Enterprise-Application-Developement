@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 1 - Smart Login Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* ========== CARD HEADER ========== */
+        .card-header {
+            background: #1e293b;
+            padding: 36px 32px 30px;
+            border-radius: 14px 14px 0 0;
+            text-align: center;
+        }
+
+        .card-header h1 {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .card-header p {
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        /* Attempt badge */
+        .attempt-badge {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 6px 16px;
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .attempt-badge.safe {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+        }
+
+        /* ========== CARD BODY ========== */
+        .card-body {
+            background: white;
+            padding: 32px;
+            border-radius: 0 0 14px 14px;
+            border: 1px solid #e2e8f0;
+            border-top: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ========== FORM GROUPS ========== */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #334155;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.25s ease;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #e17055;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(225, 112, 85, 0.12);
+        }
+
+        .form-group input.error {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        .form-group input.valid {
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+
+        .error-msg {
+            color: #ef4444;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .error-msg.show {
+            display: block;
+        }
+
+        /* ========== TOGGLE PASSWORD ========== */
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #94a3b8;
+            padding: 4px;
+            transition: color 0.2s;
+        }
+
+        .toggle-password:hover {
+            color: #e17055;
+        }
+
+        /* ========== PASSWORD STRENGTH ========== */
+        .strength-bar {
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .strength-bar.show {
+            display: block;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .strength-text {
+            font-size: 11px;
+            margin-top: 4px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .strength-text.show {
+            display: block;
+        }
+
+        /* ========== REMEMBER ME + FORGOT ========== */
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .remember-me input[type="checkbox"] {
+            accent-color: #e17055;
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+        }
+
+        .remember-me span {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .forgot-link {
+            font-size: 13px;
+            color: #e17055;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .forgot-link:hover {
+            color: #d35400;
+            text-decoration: underline;
+        }
+
+        /* ========== LOGIN BUTTON ========== */
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: #e17055;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            margin-top: 6px;
+            position: relative;
+        }
+
+        .login-btn:hover:not(:disabled) {
+            background: #d35400;
+            box-shadow: 0 8px 25px rgba(225, 112, 85, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .login-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* ========== STATUS MESSAGE ========== */
+        .status-msg {
+            text-align: center;
+            margin-top: 16px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .status-msg.error {
+            display: block;
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        .status-msg.success {
+            display: block;
+            background: #f0fdf4;
+            color: #16a34a;
+            border: 1px solid #bbf7d0;
+        }
+
+        .status-msg.locked {
+            display: block;
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        /* ========== COOLDOWN TIMER ========== */
+        .cooldown-msg {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #94a3b8;
+            display: none;
+        }
+
+        .cooldown-msg.show {
+            display: block;
+        }
+
+        .cooldown-msg span {
+            color: #ef4444;
+            font-weight: 700;
+        }
+
+        /* ========== MEDIA QUERIES ========== */
+        @media (max-width: 480px) {
+            .login-wrapper {
+                max-width: 100%;
+            }
+
+            .card-header {
+                padding: 28px 24px 24px;
+            }
+
+            .card-body {
+                padding: 24px;
+            }
+
+            .card-header h1 {
+                font-size: 1.2rem;
+            }
+
+            .form-options {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="card-header">
+            <h1>🔐 Smart Login</h1>
+            <p>Enter your credentials to continue</p>
+            <div class="attempt-badge safe" id="attemptBadge">Attempts left: 3</div>
+        </div>
+
+        <div class="card-body">
+            <form id="loginForm" onsubmit="return false;">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter username" autocomplete="off">
+                    <p class="error-msg" id="usernameError">Username cannot be empty</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" placeholder="Min 6 characters">
+                        <button type="button" class="toggle-password" id="togglePwd" onclick="togglePassword()">👁️</button>
+                    </div>
+                    <p class="error-msg" id="passwordError">Password must be at least 6 characters</p>
+
+                    <!-- Password Strength Bar -->
+                    <div class="strength-bar" id="strengthBar">
+                        <div class="strength-fill" id="strengthFill"></div>
+                    </div>
+                    <p class="strength-text" id="strengthText"></p>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                    <a class="forgot-link" onclick="alert('Password reset link sent!')">Forgot Password?</a>
+                </div>
+
+                <button type="button" class="login-btn" id="loginBtn" onclick="handleLogin()">Sign In</button>
+
+                <div class="status-msg" id="statusMsg"></div>
+                <div class="cooldown-msg" id="cooldownMsg">Account locked. Try again in <span id="cooldownTimer">30</span>s</div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ========== CLOSURE: Login Attempt Tracker ==========
+        // The closure maintains a private 'attempts' counter
+        // that persists across function calls
+        function createLoginTracker(maxAttempts) {
+            let attempts = 0; // Private variable enclosed in closure
+
+            return {
+                // Increment attempt counter
+                recordAttempt: function () {
+                    attempts++;
+                    return attempts;
+                },
+                // Check remaining attempts
+                getRemainingAttempts: function () {
+                    return maxAttempts - attempts;
+                },
+                // Check if account is locked
+                isLocked: function () {
+                    return attempts >= maxAttempts;
+                },
+                // Reset attempts (for cooldown unlock)
+                reset: function () {
+                    attempts = 0;
+                }
+            };
+        }
+
+        // Create tracker with max 3 attempts (closure instance)
+        const loginTracker = createLoginTracker(3);
+
+        // ========== DOM ELEMENTS ==========
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const usernameError = document.getElementById('usernameError');
+        const passwordError = document.getElementById('passwordError');
+        const loginBtn = document.getElementById('loginBtn');
+        const statusMsg = document.getElementById('statusMsg');
+        const attemptBadge = document.getElementById('attemptBadge');
+
+        // ========== TOGGLE PASSWORD VISIBILITY ==========
+        function togglePassword() {
+            var pwdField = document.getElementById('password');
+            var toggleBtn = document.getElementById('togglePwd');
+            if (pwdField.type === 'password') {
+                pwdField.type = 'text';
+                toggleBtn.textContent = '🙈';
+            } else {
+                pwdField.type = 'password';
+                toggleBtn.textContent = '👁️';
+            }
+        }
+
+        // ========== PASSWORD STRENGTH CHECKER ==========
+        function checkPasswordStrength(password) {
+            var score = 0;
+            if (password.length >= 6) score++;
+            if (password.length >= 10) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+            return score; // 0-5
+        }
+
+        passwordInput.addEventListener('input', function () {
+            var pwd = this.value;
+            var bar = document.getElementById('strengthBar');
+            var fill = document.getElementById('strengthFill');
+            var text = document.getElementById('strengthText');
+
+            if (pwd.length === 0) {
+                bar.classList.remove('show');
+                text.classList.remove('show');
+                return;
+            }
+
+            bar.classList.add('show');
+            text.classList.add('show');
+
+            var score = checkPasswordStrength(pwd);
+            var percent = (score / 5) * 100;
+            fill.style.width = percent + '%';
+
+            if (score <= 1) {
+                fill.style.background = '#ef4444';
+                text.style.color = '#ef4444';
+                text.textContent = 'Weak';
+            } else if (score <= 3) {
+                fill.style.background = '#f59e0b';
+                text.style.color = '#f59e0b';
+                text.textContent = 'Medium';
+            } else {
+                fill.style.background = '#22c55e';
+                text.style.color = '#22c55e';
+                text.textContent = 'Strong';
+            }
+        });
+
+        // ========== FORM VALIDATION ==========
+        function validateForm() {
+            let isValid = true;
+
+            // Username must not be empty
+            if (usernameInput.value.trim() === '') {
+                usernameInput.classList.add('error');
+                usernameInput.classList.remove('valid');
+                usernameError.classList.add('show');
+                isValid = false;
+            } else {
+                usernameInput.classList.remove('error');
+                usernameInput.classList.add('valid');
+                usernameError.classList.remove('show');
+            }
+
+            // Password must be minimum 6 characters
+            if (passwordInput.value.length < 6) {
+                passwordInput.classList.add('error');
+                passwordInput.classList.remove('valid');
+                passwordError.classList.add('show');
+                isValid = false;
+            } else {
+                passwordInput.classList.remove('error');
+                passwordInput.classList.add('valid');
+                passwordError.classList.remove('show');
+            }
+
+            return isValid;
+        }
+
+        // ========== COOLDOWN TIMER ==========
+        function startCooldown(seconds) {
+            var cooldownMsg = document.getElementById('cooldownMsg');
+            var timerEl = document.getElementById('cooldownTimer');
+            var remaining = seconds;
+
+            cooldownMsg.classList.add('show');
+            timerEl.textContent = remaining;
+
+            var interval = setInterval(function () {
+                remaining--;
+                timerEl.textContent = remaining;
+
+                if (remaining <= 0) {
+                    clearInterval(interval);
+                    cooldownMsg.classList.remove('show');
+
+                    // Reset tracker and re-enable form
+                    loginTracker.reset();
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'Sign In';
+                    usernameInput.disabled = false;
+                    passwordInput.disabled = false;
+                    attemptBadge.textContent = 'Attempts left: 3';
+                    attemptBadge.className = 'attempt-badge safe';
+                    statusMsg.className = 'status-msg';
+                    statusMsg.textContent = '';
+                }
+            }, 1000);
+        }
+
+        // ========== EVENT HANDLING: Login Handler ==========
+        function handleLogin() {
+            // Check if already locked
+            if (loginTracker.isLocked()) {
+                return;
+            }
+
+            // Validate form first
+            if (!validateForm()) {
+                return;
+            }
+
+            // Simulated credential check (hardcoded for demo)
+            const correctUser = 'admin';
+            const correctPass = 'password123';
+
+            if (
+                usernameInput.value === correctUser &&
+                passwordInput.value === correctPass
+            ) {
+                statusMsg.className = 'status-msg success';
+                statusMsg.textContent = '✅ Login successful! Welcome back.';
+                loginBtn.disabled = true;
+                loginBtn.textContent = 'Logged In';
+            } else {
+                // Record failed attempt using closure
+                loginTracker.recordAttempt();
+                const remaining = loginTracker.getRemainingAttempts();
+
+                // Update attempt badge
+                attemptBadge.textContent = 'Attempts left: ' + remaining;
+                attemptBadge.className = remaining > 1
+                    ? 'attempt-badge safe'
+                    : 'attempt-badge';
+
+                if (loginTracker.isLocked()) {
+                    // Disable login after 3 failed attempts
+                    statusMsg.className = 'status-msg locked';
+                    statusMsg.textContent =
+                        '🔒 Account locked! Too many failed attempts.';
+                    loginBtn.disabled = true;
+                    loginBtn.textContent = 'Locked';
+                    usernameInput.disabled = true;
+                    passwordInput.disabled = true;
+                    attemptBadge.textContent = 'LOCKED';
+
+                    // Auto-unlock after 30 seconds
+                    startCooldown(30);
+                } else {
+                    statusMsg.className = 'status-msg error';
+                    statusMsg.textContent =
+                        '❌ Invalid credentials. ' + remaining + ' attempt(s) remaining.';
+                }
+            }
+        }
+
+        // ========== EVENT LISTENERS ==========
+        // Clear error styling on input focus
+        usernameInput.addEventListener('focus', function () {
+            usernameInput.classList.remove('error');
+            usernameError.classList.remove('show');
+        });
+
+        passwordInput.addEventListener('focus', function () {
+            passwordInput.classList.remove('error');
+            passwordError.classList.remove('show');
+        });
+
+        // Allow Enter key to submit
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                handleLogin();
+            }
+        });
+    </script>
+</body>
+</html>

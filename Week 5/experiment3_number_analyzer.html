@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 3 - Number Analyzer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #1a1a2e;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 36px;
+        }
+
+        /* ========== INPUT SECTION ========== */
+        .input-section {
+            background: #1e293b;
+            border-radius: 14px;
+            padding: 28px;
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .input-section input {
+            flex: 1;
+            padding: 14px 18px;
+            background: #334155;
+            border: 2px solid #475569;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.25s ease;
+        }
+
+        .input-section input:focus {
+            outline: none;
+            border-color: #a78bfa;
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+        }
+
+        .input-section input::placeholder {
+            color: #64748b;
+        }
+
+        .analyze-btn {
+            padding: 14px 28px;
+            background: #a78bfa;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .analyze-btn:hover {
+            background: #8b5cf6;
+            box-shadow: 0 6px 20px rgba(167, 139, 250, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* ========== RESULTS GRID ========== */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .result-card .label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+        }
+
+        .result-card .value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        /* Card accent colors */
+        .card-palindrome .label { color: #a78bfa; }
+        .card-palindrome { border-top: 3px solid #a78bfa; }
+
+        .card-armstrong .label { color: #f59e0b; }
+        .card-armstrong { border-top: 3px solid #f59e0b; }
+
+        .card-prime .label { color: #0d9488; }
+        .card-prime { border-top: 3px solid #0d9488; }
+
+        .card-factorial .label { color: #e17055; }
+        .card-factorial { border-top: 3px solid #e17055; }
+
+        /* Full width for factorial */
+        .card-factorial {
+            grid-column: span 2;
+        }
+
+        .badge-yes {
+            display: inline-block;
+            padding: 3px 10px;
+            background: #f0fdf4;
+            color: #16a34a;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .badge-no {
+            display: inline-block;
+            padding: 3px 10px;
+            background: #fef2f2;
+            color: #dc2626;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .placeholder-text {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* ========== CONCEPT TAGS ========== */
+        .concept-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 28px;
+        }
+
+        .concept-tag {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 2px solid;
+        }
+
+        .concept-tag:nth-child(1) { color: #a78bfa; border-color: #a78bfa; background: #f5f3ff; }
+        .concept-tag:nth-child(2) { color: #f59e0b; border-color: #f59e0b; background: #fffbeb; }
+        .concept-tag:nth-child(3) { color: #0d9488; border-color: #0d9488; background: #f0fdfa; }
+        .concept-tag:nth-child(4) { color: #e17055; border-color: #e17055; background: #fff5f3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔢 Number Analyzer</h1>
+        <p class="subtitle">Enter a number and discover its properties</p>
+
+        <div class="input-section">
+            <input type="number" id="numberInput" placeholder="Enter a number...">
+            <button class="analyze-btn" onclick="analyzeNumber()">Analyze</button>
+        </div>
+
+        <div class="results-grid">
+            <div class="result-card card-palindrome">
+                <p class="label">Palindrome</p>
+                <p class="value" id="palindromeResult"><span class="placeholder-text">—</span></p>
+            </div>
+
+            <div class="result-card card-armstrong">
+                <p class="label">Armstrong</p>
+                <p class="value" id="armstrongResult"><span class="placeholder-text">—</span></p>
+            </div>
+
+            <div class="result-card card-prime">
+                <p class="label">Prime</p>
+                <p class="value" id="primeResult"><span class="placeholder-text">—</span></p>
+            </div>
+
+            <div class="result-card card-factorial">
+                <p class="label">Factorial</p>
+                <p class="value" id="factorialResult"><span class="placeholder-text">—</span></p>
+            </div>
+        </div>
+
+        <div class="concept-tags">
+            <span class="concept-tag">Named Functions</span>
+            <span class="concept-tag">Palindrome Check</span>
+            <span class="concept-tag">Prime & Armstrong</span>
+            <span class="concept-tag">Factorial</span>
+        </div>
+    </div>
+
+    <script>
+        // ========== NAMED FUNCTION: Check Palindrome ==========
+        function isPalindrome(num) {
+            var str = Math.abs(num).toString();
+            var reversed = str.split('').reverse().join('');
+            return str === reversed;
+        }
+
+        // ========== NAMED FUNCTION: Check Armstrong ==========
+        function isArmstrong(num) {
+            var str = Math.abs(num).toString();
+            var digits = str.length;
+            var sum = 0;
+
+            for (var i = 0; i < str.length; i++) {
+                sum += Math.pow(parseInt(str[i]), digits);
+            }
+
+            return sum === Math.abs(num);
+        }
+
+        // ========== NAMED FUNCTION: Check Prime ==========
+        function isPrime(num) {
+            if (num < 2) return false;
+            if (num === 2) return true;
+            if (num % 2 === 0) return false;
+
+            for (var i = 3; i <= Math.sqrt(num); i += 2) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        // ========== NAMED FUNCTION: Calculate Factorial ==========
+        function factorial(num) {
+            if (num < 0) return 'Not defined for negative numbers';
+            if (num > 20) return 'Too large to compute';
+            if (num === 0 || num === 1) return 1;
+
+            var result = 1;
+            for (var i = 2; i <= num; i++) {
+                result *= i;
+            }
+            return result;
+        }
+
+        // ========== DOM: Analyze Number ==========
+        function analyzeNumber() {
+            var input = document.getElementById('numberInput').value;
+            var num = parseInt(input);
+
+            if (input === '' || isNaN(num)) {
+                alert('Please enter a valid number!');
+                return;
+            }
+
+            // Palindrome check
+            var palResult = isPalindrome(num);
+            document.getElementById('palindromeResult').innerHTML =
+                num + (palResult
+                    ? ' <span class="badge-yes">✓ Yes</span>'
+                    : ' <span class="badge-no">✗ No</span>');
+
+            // Armstrong check
+            var armResult = isArmstrong(num);
+            document.getElementById('armstrongResult').innerHTML =
+                num + (armResult
+                    ? ' <span class="badge-yes">✓ Yes</span>'
+                    : ' <span class="badge-no">✗ No</span>');
+
+            // Prime check
+            var priResult = isPrime(num);
+            document.getElementById('primeResult').innerHTML =
+                num + (priResult
+                    ? ' <span class="badge-yes">✓ Yes</span>'
+                    : ' <span class="badge-no">✗ No</span>');
+
+            // Factorial
+            var factResult = factorial(num);
+            document.getElementById('factorialResult').textContent =
+                num + '! = ' + factResult;
+        }
+
+        // Enter key support
+        document.getElementById('numberInput').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') analyzeNumber();
+        });
+    </script>
+</body>
+</html>
