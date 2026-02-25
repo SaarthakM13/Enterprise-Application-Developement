@@ -1,6 +1,6 @@
 # EAD Course – Weekly Exercises
 
-This repository contains Week 1 through 4 codes for the Semester 4 Enterprise Application Development course.
+This repository contains Week 1 through 5 codes for the Semester 4 Enterprise Application Development course.
 
 ## Student Info
 
@@ -18,6 +18,7 @@ This repository contains Week 1 through 4 codes for the Semester 4 Enterprise Ap
 | Week 3A | Practical HTML + CSS - Styled versions of Week 2  |
 | Week 3B | Pure CSS - Advanced CSS concepts & styling        |
 | Week 4  | CSS Layouts & Components - Grid, cards, dropdowns |
+| Week 5  | JavaScript Functions & DOM - Closures, callbacks  |
 
 ---
 
@@ -73,6 +74,14 @@ This repository contains Week 1 through 4 codes for the Semester 4 Enterprise Ap
 - `exercise10_dropdown_nav.html` – Navigation Bar with Dropdown
 - `exercise11_login_page.html` – Styled Login Page
 - `exercise12_responsive_layout.html` – Responsive Layout with Media Queries
+
+### Week 5 – JavaScript Functions & DOM
+
+- `experiment1_smart_login.html` – Smart Login Page with Attempt Tracker (Closures)
+- `experiment2_calculator.html` – Advanced Calculator using Callback Functions
+- `experiment3_number_analyzer.html` – Number Analyzer Dashboard (Named Functions)
+- `experiment4_string_processor.html` – String Processor Tool (Arrow & Anonymous Functions)
+- `experiment5_employee_payroll.html` – Employee Payroll System (Constructor + Default Params)
 
 ---
 
