@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 3 - CBIT College Website</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* ========== CBIT Colors ========== */
+        :root {
+            --cbit-maroon: #8B1538;
+            --cbit-maroon-dark: #6B1028;
+            --cbit-gold: #D4AF37;
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            padding: 10px 0;
+            background: linear-gradient(135deg, var(--cbit-maroon) 0%, var(--cbit-maroon-dark) 100%) !important;
+            box-shadow: 0 4px 20px rgba(139, 21, 56, 0.3);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+        }
+
+        .navbar-brand .college-name {
+            line-height: 1.2;
+        }
+
+        .navbar-brand .college-name small {
+            display: block;
+            font-size: 0.6rem;
+            font-weight: 400;
+            color: var(--cbit-gold);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            font-size: 14px;
+            padding: 8px 16px !important;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--cbit-gold) !important;
+        }
+
+        /* ========== CAROUSEL ========== */
+        .carousel-item img {
+            height: 420px;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+
+        .carousel-caption {
+            bottom: 25%;
+        }
+
+        .carousel-caption h2 {
+            font-weight: 800;
+            font-size: 2.4rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-caption p {
+            font-size: 16px;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========== STATS BAR ========== */
+        .stats-bar {
+            background: linear-gradient(135deg, var(--cbit-maroon) 0%, var(--cbit-maroon-dark) 100%);
+            color: white;
+            padding: 40px 0;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--cbit-gold);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* ========== SECTION CARDS ========== */
+        .section-card {
+            background: white;
+            border-radius: 14px;
+            padding: 30px;
+            height: 100%;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--cbit-maroon), var(--cbit-gold));
+        }
+
+        .section-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(139, 21, 56, 0.12);
+        }
+
+        .section-icon {
+            font-size: 2.5rem;
+            margin-bottom: 14px;
+        }
+
+        .section-card h5 {
+            font-weight: 700;
+            color: var(--cbit-maroon);
+            margin-bottom: 10px;
+        }
+
+        .section-card p {
+            color: #6c757d;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ========== MODAL ========== */
+        .modal-header {
+            background: var(--cbit-maroon);
+            color: white;
+        }
+
+        .modal-header .btn-close {
+            filter: invert(1);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #94a3b8;
+            padding: 40px 0 20px;
+        }
+
+        footer h6 {
+            color: var(--cbit-gold);
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--cbit-gold);
+        }
+
+        /* ========== INFO BADGES ========== */
+        .info-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .info-badges .badge {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== BOOTSTRAP NAVBAR ========== -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <!-- College Logo/Name -->
+            <a class="navbar-brand" href="#">
+                <img src="../Assets/Images/CBIT.png" alt="CBIT Logo" class="img-fluid">
+                <div class="college-name">
+                    CBIT
+                    <small>Chaitanya Bharathi Institute of Technology</small>
+                </div>
+            </a>
+
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#programs">Programs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sections">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== BOOTSTRAP CAROUSEL ========== -->
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        </div>
+
+        <!-- Slides -->
+        <div class="carousel-inner">
+            <!-- Slide 1: Campus -->
+            <div class="carousel-item active">
+                <img src="../Assets/Images/CBIT front.jpeg" class="d-block w-100 img-fluid" alt="CBIT Campus">
+                <div class="carousel-caption">
+                    <h2>Welcome to CBIT</h2>
+                    <p>Excellence in Technical Education Since 1979</p>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <img src="../Assets/Images/cbit sports.jpeg" class="d-block w-100 img-fluid" alt="Campus Life">
+                <div class="carousel-caption">
+                    <h2>World-Class Infrastructure</h2>
+                    <p>Modern labs, smart classrooms, and research facilities</p>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <img src="../Assets/Images/campus people cbit.jpeg" class="d-block w-100 img-fluid" alt="Placements">
+                <div class="carousel-caption">
+                    <h2>95% Placement Record</h2>
+                    <p>Empowering Minds, Engineering Futures</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <!-- ========== STATS BAR ========== -->
+    <div class="stats-bar">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-6 col-md-3 mb-3 mb-md-0">
+                    <div class="stat-number">45+</div>
+                    <div class="stat-label">Years of Excellence</div>
+                </div>
+                <div class="col-6 col-md-3 mb-3 mb-md-0">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Students</div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-number">300+</div>
+                    <div class="stat-label">Faculty Members</div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Placement Rate</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== KEY PROGRAMS ========== -->
+    <div class="container my-5" id="programs">
+        <div class="row text-center mb-4">
+            <div class="col-12">
+                <h3 class="fw-bold" style="color: var(--cbit-maroon);">Key Programs</h3>
+                <p class="text-muted">Our flagship engineering departments</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="section-card">
+                    <div class="section-icon">💻</div>
+                    <h5>Computer Science & Engineering</h5>
+                    <p>AI, Machine Learning, Web Development, Software Engineering, and cutting-edge technologies.</p>
+                    <span class="badge bg-light text-dark border">Intake: 360</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="section-card">
+                    <div class="section-icon">📡</div>
+                    <h5>Electronics & Communication</h5>
+                    <p>VLSI Design, Embedded Systems, Communication Networks, and Signal Processing.</p>
+                    <span class="badge bg-light text-dark border">Intake: 180</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="section-card">
+                    <div class="section-icon">⚙️</div>
+                    <h5>Mechanical Engineering</h5>
+                    <p>Thermal Engineering, Manufacturing, Robotics, and Automobile Engineering.</p>
+                    <span class="badge bg-light text-dark border">Intake: 30</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== GRID LAYOUT: 3 SECTIONS ========== -->
+    <div class="bg-light py-5" id="sections">
+        <div class="container">
+            <div class="row text-center mb-4">
+                <div class="col-12">
+                    <h3 class="fw-bold" style="color: var(--cbit-maroon);">Why Choose CBIT?</h3>
+                    <p class="text-muted">Explore our key highlights</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Section 1: Departments -->
+                <div class="col-md-4">
+                    <div class="section-card">
+                        <div class="section-icon">🏛️</div>
+                        <h5>Departments</h5>
+                        <p>13 UG and PG departments offering B.E., B.Tech, M.Tech and MBA programs with NAAC A+ accreditation.</p>
+                        <button class="btn btn-outline-danger btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#infoModal" onclick="setModalContent('departments')">
+                            More Info
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section 2: Facilities -->
+                <div class="col-md-4">
+                    <div class="section-card">
+                        <div class="section-icon">🔬</div>
+                        <h5>Facilities</h5>
+                        <p>State-of-the-art labs, central library, sports grounds, hostels, and a modern campus spread over 40+ acres.</p>
+                        <button class="btn btn-outline-success btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#infoModal" onclick="setModalContent('facilities')">
+                            More Info
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section 3: Placements -->
+                <div class="col-md-4">
+                    <div class="section-card">
+                        <div class="section-icon">💼</div>
+                        <h5>Placements</h5>
+                        <p>95% placement rate with top recruiters including TCS, Infosys, Wipro, Amazon, Microsoft, and Google.</p>
+                        <button class="btn btn-outline-warning btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#infoModal" onclick="setModalContent('placements')">
+                            More Info
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== BOOTSTRAP MODAL ========== -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="infoModalLabel">More Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    Loading...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h6>🎓 CBIT</h6>
+                    <p class="small">Chaitanya Bharathi Institute of Technology</p>
+                    <p class="small">Empowering Minds, Engineering Futures</p>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h6>Contact Us</h6>
+                    <p class="small mb-1">📍 Gandipet, Hyderabad - 500075</p>
+                    <p class="small mb-1">📞 +91 40 2419 3276</p>
+                    <p class="small mb-1">✉️ principal@cbit.ac.in</p>
+                </div>
+                <div class="col-md-4">
+                    <h6>Quick Links</h6>
+                    <a href="#" class="d-block small mb-1">Admissions</a>
+                    <a href="#" class="d-block small mb-1">Placements</a>
+                    <a href="#" class="d-block small mb-1">Research</a>
+                </div>
+            </div>
+            <hr class="my-3" style="border-color: rgba(255,255,255,0.1);">
+            <p class="text-center small mb-0">© 2026 CBIT - Chaitanya Bharathi Institute of Technology | Built with Bootstrap 5</p>
+        </div>
+    </footer>
+
+    <!-- ========== BOOTSTRAP CONCEPTS ========== -->
+    <div class="container">
+        <div class="info-badges">
+            <span class="badge bg-primary">Navbar</span>
+            <span class="badge bg-success">Carousel</span>
+            <span class="badge bg-warning text-dark">Grid Layout</span>
+            <span class="badge bg-danger">Modal</span>
+            <span class="badge bg-info text-dark">Responsive Images</span>
+            <span class="badge bg-secondary">Buttons</span>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // ========== MODAL CONTENT FUNCTION ==========
+        function setModalContent(section) {
+            var title = document.getElementById('infoModalLabel');
+            var body = document.getElementById('modalBody');
+
+            switch (section) {
+                case 'departments':
+                    title.textContent = '🏛️ CBIT Departments';
+                    body.innerHTML =
+                        '<ul class="list-group list-group-flush">' +
+                        '<li class="list-group-item">Computer Science & Engineering</li>' +
+                        '<li class="list-group-item">Information Technology</li>' +
+                        '<li class="list-group-item">Electronics & Communication</li>' +
+                        '<li class="list-group-item">Electrical & Electronics</li>' +
+                        '<li class="list-group-item">Mechanical Engineering</li>' +
+                        '<li class="list-group-item">Civil Engineering</li>' +
+                        '<li class="list-group-item">AI & Data Science</li>' +
+                        '<li class="list-group-item">Biotechnology</li>' +
+                        '</ul>';
+                    break;
+
+                case 'facilities':
+                    title.textContent = '🔬 Campus Facilities';
+                    body.innerHTML =
+                        '<ul class="list-group list-group-flush">' +
+                        '<li class="list-group-item">🖥️ 20+ Modern Computer Labs</li>' +
+                        '<li class="list-group-item">📚 Central Library (1,00,000+ Books)</li>' +
+                        '<li class="list-group-item">🏟️ Sports Ground, Indoor Stadium & Gym</li>' +
+                        '<li class="list-group-item">🏠 Boys & Girls Hostel</li>' +
+                        '<li class="list-group-item">🍽️ Cafeteria, Food Court & Canteen</li>' +
+                        '<li class="list-group-item">📶 Campus-wide Wi-Fi</li>' +
+                        '<li class="list-group-item">🏥 Medical Center on Campus</li>' +
+                        '</ul>';
+                    break;
+
+                case 'placements':
+                    title.textContent = '💼 Placement Highlights';
+                    body.innerHTML =
+                        '<p><strong>Placement Rate:</strong> 95%</p>' +
+                        '<p><strong>Highest Package:</strong> ₹44 LPA</p>' +
+                        '<p><strong>Average Package:</strong> ₹8.5 LPA</p>' +
+                        '<p class="mt-3"><strong>Top Recruiters:</strong></p>' +
+                        '<div class="d-flex flex-wrap gap-2">' +
+                        '<span class="badge bg-primary">TCS</span>' +
+                        '<span class="badge bg-success">Infosys</span>' +
+                        '<span class="badge bg-info text-dark">Wipro</span>' +
+                        '<span class="badge bg-warning text-dark">Amazon</span>' +
+                        '<span class="badge bg-danger">Microsoft</span>' +
+                        '<span class="badge bg-dark">Google</span>' +
+                        '<span class="badge bg-secondary">Deloitte</span>' +
+                        '</div>';
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

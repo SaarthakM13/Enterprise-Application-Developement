@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 1 - Class Timetable</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        /* Table customization */
+        .table {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .table thead th {
+            background: #2c3e50;
+            color: white;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 2px solid #1a252f;
+            padding: 14px 8px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table tbody td {
+            padding: 12px 8px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #adb5bd;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f0f4ff;
+        }
+
+        /* Day column */
+        .day-cell {
+            font-weight: 700;
+            color: #1a1a2e;
+            background: #c4c6c9 !important;
+            text-align: center;
+        }
+
+        /* Lunch column */
+        .lunch-cell {
+            background: #fff3cd !important;
+            color: #664d03 !important;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 2px;
+        }
+
+        /* Subject badges */
+        .subject {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .subject-pqt { background: #e3f2fd; color: #1565c0; }
+        .subject-dbms { background: #f3e5f5; color: #7b1fa2; }
+        .subject-ead { background: #e8f5e9; color: #2e7d32; }
+        .subject-eea { background: #fff3e0; color: #e65100; }
+        .subject-es { background: #e0f7fa; color: #00695c; }
+        .subject-pei { background: #fce4ec; color: #c62828; }
+        .subject-lab { background: #ede7f6; color: #4527a0; }
+
+        /* Info badges */
+        .info-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 24px;
+        }
+
+        .info-badges .badge {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== BOOTSTRAP CONTAINER ========== -->
+    <div class="container-fluid">
+
+        <!-- ========== HEADER ROW ========== -->
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h1>📅 Class Timetable</h1>
+                <p class="subtitle">Class: BE - IV Semester IT-2 | Batch: B3 | Room: L-301 | W.E.F: 19/01/2026</p>
+            </div>
+        </div>
+
+        <!-- ========== TIMETABLE ROW ========== -->
+        <div class="row">
+            <div class="col-12">
+                <!-- Bootstrap Table with bordered, hover -->
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Day / Time</th>
+                            <th>I<br><small>9:10-10:10</small></th>
+                            <th>II<br><small>10:10-11:10</small></th>
+                            <th>III<br><small>11:15-12:15</small></th>
+                            <th style="background: #2c3e50 !important; color: #dee2e6 !important;">LUNCH<br><small>12:15-1:00</small></th>
+                            <th>IV<br><small>1:00-2:00</small></th>
+                            <th>V<br><small>2:00-3:00</small></th>
+                            <th>VI<br><small>3:05-4:05</small></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Monday -->
+                        <tr>
+                            <td class="day-cell">MONDAY</td>
+                            <td><span class="subject subject-pei">PE-I</span></td>
+                            <td><span class="subject subject-eea">EEA</span></td>
+                            <td><span class="subject subject-pqt">PQT</span></td>
+                            <!-- Lunch: Bootstrap contextual class with rowspan -->
+                            <td class="lunch-cell text-center" rowspan="5">🍽️<br>L<br>U<br>N<br>C<br>H</td>
+                            <td><span class="subject subject-dbms">DBMS</span></td>
+                            <td class="table-info"><small class="fw-bold">📚 Library</small></td>
+                            <td class="table-success"><small class="fw-bold">🏟️ Sports</small></td>
+                        </tr>
+
+                        <!-- Tuesday -->
+                        <tr>
+                            <td class="day-cell">TUESDAY</td>
+                            <td colspan="2" class="table-light"><span class="subject subject-lab">MP-I (Mini Project)</span></td>
+                            <td class="table-info"><small class="fw-bold">📚 Library</small></td>
+                            <td><span class="subject subject-pqt">PQT</span></td>
+                            <td><span class="subject subject-eea">EEA</span></td>
+                            <td><span class="subject subject-es">ES</span></td>
+                        </tr>
+
+                        <!-- Wednesday -->
+                        <tr>
+                            <td class="day-cell">WEDNESDAY</td>
+                            <td><span class="subject subject-ead">EAD</span></td>
+                            <td><span class="subject subject-pei">PE-I</span></td>
+                            <td><span class="subject subject-pqt">PQT</span></td>
+                            <td colspan="3" class="table-light"><span class="subject subject-lab">EAD LAB (B3)</span></td>
+                        </tr>
+
+                        <!-- Thursday -->
+                        <tr>
+                            <td class="day-cell">THURSDAY</td>
+                            <td><span class="subject subject-dbms">DBMS</span></td>
+                            <td><span class="subject subject-eea">EEA</span></td>
+                            <td><span class="subject subject-ead">EAD</span></td>
+                            <td><span class="subject subject-pei">PE-I</span></td>
+                            <td><span class="subject subject-es">ES</span></td>
+                            <td><span class="subject subject-pqt">PQT (T)</span></td>
+                        </tr>
+
+                        <!-- Friday -->
+                        <tr>
+                            <td class="day-cell">FRIDAY</td>
+                            <td colspan="3" class="table-light"><span class="subject subject-lab">DBMS LAB (B3)</span></td>
+                            <td><span class="subject subject-dbms">DBMS</span></td>
+                            <td><span class="subject subject-ead">EAD</span></td>
+                            <td class="table-danger"><small class="fw-bold">🎯 Mentoring</small></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ========== SUBJECT DETAILS TABLE ========== -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <h5 class="fw-bold text-center mb-3">📋 Subject Details</h5>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th style="background:#2c3e50;color:white;">Sub-Code</th>
+                            <th style="background:#2c3e50;color:white;">Course Name</th>
+                            <th style="background:#2c3e50;color:white;">Faculty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>22MTC15</td>
+                            <td>Probability and Queueing Theory (PQT)</td>
+                            <td>Dr. V. Omeshwar Reddy</td>
+                        </tr>
+                        <tr>
+                            <td>22CSC11N</td>
+                            <td>Database Management Systems (DBMS)</td>
+                            <td>Dr. Kolikipogu Ramakrishna</td>
+                        </tr>
+                        <tr>
+                            <td>22ITC08N</td>
+                            <td>Enterprise Application Development (EAD)</td>
+                            <td>Mr. N. Shiva Kumar</td>
+                        </tr>
+                        <tr>
+                            <td>23MBC01</td>
+                            <td>Engineering Economics & Accountancy (EEA)</td>
+                            <td>Prof. T Venkat</td>
+                        </tr>
+                        <tr>
+                            <td>22CEM01</td>
+                            <td>Environmental Science (ES)</td>
+                            <td>Dr. Kiran Y. V.</td>
+                        </tr>
+                        <tr>
+                            <td>22ITE01</td>
+                            <td>Data Mining (PE-I)</td>
+                            <td>Dr. Suresh Pabboju</td>
+                        </tr>
+                        <tr>
+                            <td>22CSC13N</td>
+                            <td>Database Management Systems Lab</td>
+                            <td>Dr. Kolikipogu Ramakrishna</td>
+                        </tr>
+                        <tr>
+                            <td>22ITC09N</td>
+                            <td>Enterprise Application Development Lab</td>
+                            <td>Mr. N. Shiva Kumar</td>
+                        </tr>
+                        <tr>
+                            <td>22ITC07</td>
+                            <td>Mini Project - I (MP-I)</td>
+                            <td>Dr. R M Krishna Sureddi (B3)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ========== BOOTSTRAP CONCEPTS ========== -->
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="info-badges">
+                    <span class="badge bg-primary">Bootstrap Grid</span>
+                    <span class="badge bg-success">Table Component</span>
+                    <span class="badge bg-warning text-dark">Contextual Classes</span>
+                    <span class="badge bg-info text-dark">Responsive Design</span>
+                    <span class="badge bg-secondary">Container-fluid</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

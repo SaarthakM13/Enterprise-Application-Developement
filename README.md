@@ -1,6 +1,6 @@
 # EAD Course – Weekly Exercises
 
-This repository contains Week 1 through 5 codes for the Semester 4 Enterprise Application Development course.
+This repository contains Week 1 through 6 codes for the Semester 4 Enterprise Application Development course.
 
 ## Student Info
 
@@ -19,6 +19,7 @@ This repository contains Week 1 through 5 codes for the Semester 4 Enterprise Ap
 | Week 3B | Pure CSS - Advanced CSS concepts & styling        |
 | Week 4  | CSS Layouts & Components - Grid, cards, dropdowns |
 | Week 5  | JavaScript Functions & DOM - Closures, callbacks  |
+| Week 6  | Bootstrap Components - Grid, Forms, Navbar, Modal |
 
 ---
 
@@ -82,6 +83,12 @@ This repository contains Week 1 through 5 codes for the Semester 4 Enterprise Ap
 - `experiment3_number_analyzer.html` – Number Analyzer Dashboard (Named Functions)
 - `experiment4_string_processor.html` – String Processor Tool (Arrow & Anonymous Functions)
 - `experiment5_employee_payroll.html` – Employee Payroll System (Constructor + Default Params)
+
+### Week 6 – Bootstrap Components
+
+- `experiment1_timetable.html` – Responsive Class Timetable (Bootstrap Grid + Table)
+- `experiment2_registration_form.html` – Student Registration Form (Bootstrap Form + Alert)
+- `experiment3_college_website.html` – CBIT College Website (Navbar + Carousel + Modal)
 
 ---
 

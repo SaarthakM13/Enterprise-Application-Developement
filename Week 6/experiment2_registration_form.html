@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 2 - Student Registration Form</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        /* Form card */
+        .form-card {
+            background: white;
+            border-radius: 14px;
+            padding: 36px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e9ecef;
+        }
+
+        .form-card .form-label {
+            font-weight: 600;
+            font-size: 13px;
+            color: #495057;
+            margin-bottom: 6px;
+        }
+
+        .form-card .form-control,
+        .form-card .form-select {
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            border: 2px solid #dee2e6;
+            transition: all 0.25s ease;
+        }
+
+        .form-card .form-control:focus,
+        .form-card .form-select:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.12);
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        /* Info badges */
+        .info-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 24px;
+        }
+
+        .info-badges .badge {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== BOOTSTRAP CONTAINER ========== -->
+    <div class="container">
+
+        <!-- ========== HEADER ROW ========== -->
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h1>📝 Student Registration Form</h1>
+                <p class="subtitle">Fill in your details using the form below</p>
+            </div>
+        </div>
+
+        <!-- ========== FORM ROW ========== -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-12">
+                <div class="form-card">
+
+                    <!-- Bootstrap Alert (hidden by default) -->
+                    <div id="alertBox" style="display: none;"></div>
+
+                    <form id="registrationForm">
+
+                        <!-- ===== PERSONAL DETAILS SECTION ===== -->
+                        <p class="section-title">Personal Details</p>
+
+                        <!-- Row: Name + Roll Number -->
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="studentName" class="form-label">Student Name</label>
+                                <input type="text" class="form-control" id="studentName" placeholder="Enter full name">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="rollNumber" class="form-label">Roll Number</label>
+                                <input type="text" class="form-control" id="rollNumber" placeholder="e.g. SE-101">
+                            </div>
+                        </div>
+
+                        <!-- Row: Email -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" placeholder="student@college.edu">
+                            </div>
+                        </div>
+
+                        <!-- Row: Gender (Radio Buttons) + Department (Dropdown) -->
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label class="form-label">Gender</label>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male">
+                                        <label class="form-check-label" for="genderMale">Male</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female">
+                                        <label class="form-check-label" for="genderFemale">Female</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderOther" value="Other">
+                                        <label class="form-check-label" for="genderOther">Other</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="department" class="form-label">Department</label>
+                                <!-- Bootstrap Select Dropdown -->
+                                <select class="form-select" id="department">
+                                    <option value="" selected disabled>Select department</option>
+                                    <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+                                    <option value="Information Technology">Information Technology</option>
+                                    <option value="Electronics & Communication">Electronics & Communication</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Civil Engineering">Civil Engineering</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- ===== ACADEMIC DETAILS SECTION ===== -->
+                        <p class="section-title mt-4">Academic Details</p>
+
+                        <!-- Row: Subjects (Checkboxes) -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">Subjects Enrolled</label>
+                                <div class="row">
+                                    <div class="col-md-4 col-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="subEAD" value="EAD">
+                                            <label class="form-check-label" for="subEAD">EAD</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="subDBMS" value="DBMS">
+                                            <label class="form-check-label" for="subDBMS">DBMS</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="subPQT" value="PQT">
+                                            <label class="form-check-label" for="subPQT">PQT</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="subEEA" value="EEA">
+                                            <label class="form-check-label" for="subEEA">EEA</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="subES" value="ES">
+                                            <label class="form-check-label" for="subES">ES</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="subPEI" value="PE-I">
+                                            <label class="form-check-label" for="subPEI">PE-I</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row: Upload Photo -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <label for="photoUpload" class="form-label">Upload Photo</label>
+                                <input class="form-control" type="file" id="photoUpload" accept="image/*">
+                            </div>
+                        </div>
+
+                        <!-- ===== BUTTONS ===== -->
+                        <div class="row">
+                            <div class="col-12 d-flex gap-3">
+                                <!-- Bootstrap Submit Button -->
+                                <button type="button" class="btn btn-primary px-4" onclick="submitForm()">
+                                    Submit
+                                </button>
+                                <!-- Bootstrap Reset Button -->
+                                <button type="button" class="btn btn-outline-secondary px-4" onclick="resetForm()">
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== BOOTSTRAP CONCEPTS ========== -->
+        <div class="row mt-4 justify-content-center">
+            <div class="col-lg-8 col-md-10 col-12">
+                <div class="info-badges">
+                    <span class="badge bg-primary">Form Controls</span>
+                    <span class="badge bg-success">Grid Layout</span>
+                    <span class="badge bg-warning text-dark">Alert Component</span>
+                    <span class="badge bg-info text-dark">Buttons</span>
+                    <span class="badge bg-secondary">Responsive Design</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // ========== SHOW ALERT FUNCTION ==========
+        function showAlert(type, message) {
+            var alertBox = document.getElementById('alertBox');
+            alertBox.style.display = 'block';
+            alertBox.className = 'alert alert-' + type + ' alert-dismissible fade show';
+            alertBox.innerHTML = message +
+                '<button type="button" class="btn-close" onclick="this.parentElement.style.display=\'none\'"></button>';
+
+            // Auto-hide after 5 seconds
+            setTimeout(function () {
+                alertBox.style.display = 'none';
+            }, 5000);
+        }
+
+        // ========== FORM SUBMISSION ==========
+        function submitForm() {
+            var name = document.getElementById('studentName').value.trim();
+            var roll = document.getElementById('rollNumber').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var dept = document.getElementById('department').value;
+            var gender = document.querySelector('input[name="gender"]:checked');
+
+            // Validation
+            if (!name) {
+                showAlert('danger', '<strong>⚠️ Error!</strong> Please enter student name.');
+                return;
+            }
+            if (!roll) {
+                showAlert('danger', '<strong>⚠️ Error!</strong> Please enter roll number.');
+                return;
+            }
+            if (!email) {
+                showAlert('danger', '<strong>⚠️ Error!</strong> Please enter email address.');
+                return;
+            }
+            if (!gender) {
+                showAlert('danger', '<strong>⚠️ Error!</strong> Please select gender.');
+                return;
+            }
+            if (!dept) {
+                showAlert('danger', '<strong>⚠️ Error!</strong> Please select a department.');
+                return;
+            }
+
+            // Get selected subjects
+            var subjects = [];
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(function (cb) {
+                subjects.push(cb.value);
+            });
+
+            // Show success alert
+            showAlert('success',
+                '<strong>✅ Registration Successful!</strong><br>' +
+                '<strong>Name:</strong> ' + name + '<br>' +
+                '<strong>Roll No:</strong> ' + roll + '<br>' +
+                '<strong>Email:</strong> ' + email + '<br>' +
+                '<strong>Gender:</strong> ' + gender.value + '<br>' +
+                '<strong>Department:</strong> ' + dept + '<br>' +
+                '<strong>Subjects:</strong> ' + (subjects.length > 0 ? subjects.join(', ') : 'None selected')
+            );
+        }
+
+        // ========== FORM RESET ==========
+        function resetForm() {
+            document.getElementById('registrationForm').reset();
+            var alertBox = document.getElementById('alertBox');
+            alertBox.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
