@@ -1,6 +1,6 @@
 # EAD Course – Weekly Exercises
 
-This repository contains Week 1 through 7 codes for the Semester 4 Enterprise Application Development course.
+This repository contains Week 1 through 9 codes for the Semester 4 Enterprise Application Development course.
 
 ## Student Info
 
