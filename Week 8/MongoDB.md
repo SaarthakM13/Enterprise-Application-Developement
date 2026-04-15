@@ -1,7 +1,3 @@
----
-title: "MongoDB CRUD Operations"
-date: "April 14, 2026"
----
 
 # MongoDB CRUD Operations
 
