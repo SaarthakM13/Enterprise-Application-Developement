@@ -1,6 +1,6 @@
 # EAD Course – Weekly Exercises
 
-This repository contains Week 1 through 6 codes for the Semester 4 Enterprise Application Development course.
+This repository contains Week 1 through 7 codes for the Semester 4 Enterprise Application Development course.
 
 ## Student Info
 
@@ -20,6 +20,9 @@ This repository contains Week 1 through 6 codes for the Semester 4 Enterprise Ap
 | Week 4  | CSS Layouts & Components - Grid, cards, dropdowns |
 | Week 5  | JavaScript Functions & DOM - Closures, callbacks  |
 | Week 6  | Bootstrap Components - Grid, Forms, Navbar, Modal |
+| Week 7  | React - Components, Props, State, Routing         |
+| Week 8  | MongoDB - Shell CRUD Operations & Replica Sets    |
+| Week 9  | Node.js - HTTP Web Server & Interactive Filesystem|
 
 ---
 
@@ -90,8 +93,29 @@ This repository contains Week 1 through 6 codes for the Semester 4 Enterprise Ap
 - `experiment2_registration_form.html` – Student Registration Form (Bootstrap Form + Alert)
 - `experiment3_college_website.html` – CBIT College Website (Navbar + Carousel + Modal)
 
+### Week 7 – React
+
+- `experiment1_counter` – Counter with Increment, Decrement, and Reset
+- `experiment2_timer` – Timer with Start, Stop, lap and Reset
+- `experiment3_Password_Checker` – Password Checker with Strength Meter
+- `experiment4_student_table` – Student Table with Search and Pagination
+- `experiment5_multi_page_app` – Multi-Page Application with Routing
+
+### Week 8 – MongoDB CRUD Operations
+
+- `mongoDB.md` – Guide for performing CRUD operations, advanced queries, and replica set setup using MongoDB Shell and Compass.
+
+### Week 9 – Node.js & Express.js (Part 1)
+
+- `experiment1_http_server.js` – Custom CBIT web server built with the native `http` module serving HTML pages.
+- `experiment2_file_system.js` – Interactive terminal app for reading, writing, and appending student data using the `fs` module.
+
 ---
 
 ## How to View
 
-Open each HTML file in a browser (double-click or use Live Server) to see the output.
+- Open each HTML file in a browser (double-click or use Live Server) to see the output.
+
+- For React experiments, run `npm start` in the respective experiment folder.
+
+- For Node.js experiments, run `node <filename>` in your terminal.
