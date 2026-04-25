@@ -1,6 +1,6 @@
 # EAD Course – Weekly Exercises
 
-This repository contains Week 1 through 9 codes for the Semester 4 Enterprise Application Development course.
+This repository contains the entire lab codes for the Semester 4 Enterprise Application Development course.
 
 ## Student Info
 
@@ -22,7 +22,7 @@ This repository contains Week 1 through 9 codes for the Semester 4 Enterprise Ap
 | Week 6  | Bootstrap Components - Grid, Forms, Navbar, Modal |
 | Week 7  | React - Components, Props, State, Routing         |
 | Week 8  | MongoDB - Shell CRUD Operations & Replica Sets    |
-| Week 9  | Node.js - HTTP Web Server & Interactive Filesystem|
+| Week 9  | Node.js & Express.js - HTTP, FS, JwT, MongoDB API |
 
 ---
 
@@ -105,10 +105,14 @@ This repository contains Week 1 through 9 codes for the Semester 4 Enterprise Ap
 
 - `mongoDB.md` – Guide for performing CRUD operations, advanced queries, and replica set setup using MongoDB Shell and Compass.
 
-### Week 9 – Node.js & Express.js (Part 1)
+### Week 9 – Node.js & Express.js
 
-- `experiment1_http_server.js` – Custom CBIT web server built with the native `http` module serving HTML pages.
-- `experiment2_file_system.js` – Interactive terminal app for reading, writing, and appending student data using the `fs` module.
+- `experiment1_http_server.js` – Custom web server built with the native `http` module serving HTML pages.
+- `experiment2_file_system.js` – Interactive terminal app for reading, writing, and appending data using the `fs` module.
+- `experiment3_express_middleware.js` – Express server demonstrating custom middleware logging and static file serving.
+- `experiment4_rest_api.js` – Full in-memory REST API with a dynamic frontend Student Dashboard.
+- `experiment5_jwt_auth.js` – Implementation of secure JSON Web Token (JWT) authentication flow.
+- `experiment6_mongodb_crud.js` – Full-stack application demonstrating database CRUD operations with Mongoose and MongoDB.
 
 ---
 
